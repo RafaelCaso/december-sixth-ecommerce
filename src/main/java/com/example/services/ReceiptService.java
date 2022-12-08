@@ -43,13 +43,16 @@ public class ReceiptService {
 		String now = LocalDateTime.now().format(format);
 		List<Item> receiptItems = new ArrayList<>();
 		Double total = 00.00;
-		System.out.println(amountOfItems);
 		
 		for(Item i : items) {
 			Item addItem = iRepo.findById(i.getItemId()).get();
-			total += addItem.getPrice() * amountOfItems;
+			addItem.setAmount(i.getAmount());
+			total += addItem.getPrice() * i.getAmount();
 			receiptItems.add(addItem);
 		}
+		
+		total *= 1.59;
+		total += 2;
 		Integer amountOfItemsOnReceipt = receiptItems.size();
 		Receipt rec = new Receipt(u, receiptItems, total, now, amountOfItemsOnReceipt);
 		return rRepo.save(rec);
