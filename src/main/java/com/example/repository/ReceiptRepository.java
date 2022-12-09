@@ -10,5 +10,5 @@ import com.example.models.User;
 
 @Repository
 public interface ReceiptRepository extends JpaRepository<Receipt, Integer> {
-	List<Receipt> getReceiptsByUser(User u);
+	List<Receipt> getReceiptsByUser(Integer u);
 }

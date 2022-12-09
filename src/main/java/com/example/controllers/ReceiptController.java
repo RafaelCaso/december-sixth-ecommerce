@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.models.Item;
@@ -33,7 +34,6 @@ public class ReceiptController {
 		Integer userId = rro.userId;
 		List<Item> items = rro.items;
 		Integer amountOfItems = rro.amountOfItems;
-		System.out.println(rro.amountOfItems);
 		return rServ.createReceipt(userId, items, amountOfItems);
 	}
 	
@@ -43,8 +43,8 @@ public class ReceiptController {
 	}
 	
 	@GetMapping("/readuser")
-	public List<Receipt> readUser(@RequestBody User user) {
-		return rServ.getReceiptByUser(user);
+	public List<Receipt> readUser(@RequestParam(name = "id") Integer id) {
+		return rServ.getReceiptByUser(id);
 	}
 	
 	@PutMapping("/update")

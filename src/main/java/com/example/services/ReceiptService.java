@@ -1,5 +1,6 @@
 package com.example.services;
 
+import java.text.DecimalFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -52,7 +53,17 @@ public class ReceiptService {
 		}
 		
 		total *= 1.59;
-		total += 2;
+		
+		if(total < 952.38) {
+			total += 2;
+		}
+		
+		DecimalFormat df = new DecimalFormat("0.00");
+		total = Double.parseDouble(df.format(total));
+		
+		
+		
+		
 		Integer amountOfItemsOnReceipt = receiptItems.size();
 		Receipt rec = new Receipt(u, receiptItems, total, now, amountOfItemsOnReceipt);
 		return rRepo.save(rec);
@@ -79,15 +90,14 @@ public class ReceiptService {
 		return "Receipt has been deleted";
 	}
 	
-	public List<Receipt> getReceiptByUser(User u) {
+	public List<Receipt> getReceiptByUser(Integer u) {
 		List<Receipt> all = rRepo.findAll();
 		List<Receipt> result = new ArrayList<>();
 		for(Receipt r : all) {
-			if(r.getUser().getUserId() == u.getUserId()) {
+			if(r.getUser().getUserId() == u) {
 				result.add(r);
 			}
-		}
-		
+		}		
 		return result;
 	}
 
