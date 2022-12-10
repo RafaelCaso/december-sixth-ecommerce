@@ -53,9 +53,9 @@ public class UserService {
 		prevUser.setFirstName(updateUser.getFirstName());
 		prevUser.setLastName(updateUser.getLastName());
 		prevUser.setEmail(updateUser.getEmail());
-		prevUser.setPassword(updateUser.getPassword());
 		prevUser.setAddress(updateUser.getAddress());
 		prevUser.setPhoneNumber(updateUser.getPhoneNumber());
+		updateUser.setPassword(prevUser.getPassword());
 		
 		return userRepo.save(updateUser);
 		
