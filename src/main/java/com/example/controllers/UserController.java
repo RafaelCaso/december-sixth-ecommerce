@@ -32,8 +32,8 @@ public class UserController {
 		String lastName = body.get("lastName");
 		String email = body.get("email");
 		String password = body.get("password");
-		String address = body.get("address");
-		String phoneNumber = body.get("phoneNumber");
+		String address = "";
+		String phoneNumber = "";
 		
 		return uServ.registerUser(firstName, lastName, email, password, address, phoneNumber);
 	}
